@@ -1,8 +1,3 @@
-// decided not to limit by depth but by time, as if the bot were a real player and forced to move despite not having 'finished his thought', i.e. he is interrupted without even finishing to search at a certain broadth
-
-//int maxDepth;
-int t0; // timestamp (long isn't needed since Integer works for a few days) for when bot begins calculating each time
-int timeout = 10000;
 
 void botResponse() {
   print("\nThe Computer is calculating a response...\t");
@@ -68,11 +63,20 @@ void botResponse() {
 }
 
 double minimax(int depth, boolean isMaximizing, int[][] _grid, int[] _playerFigures, int[] _botFigures) {
-
   int w = checkWinner(_grid);
-  if (millis() - t0 >= timeout /* || depth >= maxDepth || */ || w != 0 || noMoreMoves(_grid, !isMaximizing, _playerFigures, _botFigures)) { // terminal condition: if we have a clear winner or the board is full (no more moves to play)
+
+  //confer documentation on GitHub, if you want to comment the follwing if-statement out: https://github.com/dango301/Tic-Tac-Toe/blob/main/README.md
+  if (playerFigures[0] + playerFigures[1] + playerFigures[2] + botFigures[0] + botFigures[1] + botFigures[2] >= 2 * 3 * figsPerSize - 3) {
+    if (depth >= maxDepth) {
+      println("Abort at depth", depth);
+      return w;
+    }
+  }
+
+  if (millis() - t0 >= timeout || w != 0 || noMoreMoves(_grid, !isMaximizing, _playerFigures, _botFigures)) { // terminal condition: if we have a clear winner or the board is full (no more moves to play)
     return w;
   }
+
 
 
   if (isMaximizing) {

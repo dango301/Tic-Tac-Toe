@@ -1,3 +1,7 @@
+// Public Variables
+int timeout = 10000; // in ms
+int maxDepth = 4; // should be chosen so that AI never times out before reaching maxDepth (test by checking first one or two moves by AI)
+
 import processing.awt.PSurfaceAWT.SmoothCanvas;
 import javax.swing.JFrame;
 import java.awt.Dimension;
@@ -30,6 +34,7 @@ PShape redFigure; // Icons by https://www.flaticon.com/de/autoren/those-icons fr
 PFont font;
 int dragging = 0;
 boolean drawBeforeResponding = true;
+int t0; // timestamp (long isn't needed since Integer works for a few days) for when bot begins calculating each time
 
 
 void setup() {
