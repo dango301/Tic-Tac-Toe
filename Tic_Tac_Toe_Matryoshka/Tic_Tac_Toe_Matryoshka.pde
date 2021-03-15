@@ -1,6 +1,6 @@
 // Public Variables
-int timeout = 10000; // in ms
-int maxDepth = 4; // should be chosen so that AI never times out before reaching maxDepth (test by checking first one or two moves by AI)
+int timeout = 10; // in seconds
+int maxDepth = 5; // should be chosen so that AI never times out before reaching maxDepth (test by checking first one or two moves by AI)
 
 import processing.awt.PSurfaceAWT.SmoothCanvas;
 import javax.swing.JFrame;

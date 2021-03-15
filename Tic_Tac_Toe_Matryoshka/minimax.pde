@@ -38,7 +38,7 @@ void botResponse() {
 
 
   int t = millis() - t0;
-  if (t >= timeout) print(" The Computer reached his maximum computing time. He is now forced to play:");
+  if (t >= timeout * 1000) print(" The Computer reached his maximum computing time. He is now forced to play:");
 
   if (bestMoveX == -1 || bestMoveY == -1 || bestSize == -1) {
     println("No best move could be found by the computer");
@@ -68,12 +68,12 @@ double minimax(int depth, boolean isMaximizing, int[][] _grid, int[] _playerFigu
   //confer documentation on GitHub, if you want to comment the follwing if-statement out: https://github.com/dango301/Tic-Tac-Toe/blob/main/README.md
   if (playerFigures[0] + playerFigures[1] + playerFigures[2] + botFigures[0] + botFigures[1] + botFigures[2] >= 2 * 3 * figsPerSize - 3) {
     if (depth >= maxDepth) {
-      println("Abort at depth", depth);
+      //println("Abort at depth", depth);
       return w;
     }
   }
 
-  if (millis() - t0 >= timeout || w != 0 || noMoreMoves(_grid, !isMaximizing, _playerFigures, _botFigures)) { // terminal condition: if we have a clear winner or the board is full (no more moves to play)
+  if (millis() - t0 >= timeout * 1000 || w != 0 || noMoreMoves(_grid, !isMaximizing, _playerFigures, _botFigures)) { // terminal condition: if we have a clear winner or the board is full (no more moves to play)
     return w;
   }
 
